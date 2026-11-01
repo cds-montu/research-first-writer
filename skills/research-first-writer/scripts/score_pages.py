@@ -2,7 +2,7 @@
 """Transparent page scores from references/checklists.md (section 1).
 
 Usage:
-    python3 scripts/score_pages.py pages.json
+    python3 scripts/score_pages.py pages.json [--json]
 
 pages.json is a list of pages; each signal is a number from 0 to 1, or null
 when it could not be observed (it is then left out and the weights renormalise):
@@ -30,13 +30,17 @@ def score(signals):
     return min(1, base + bonus) * 100, total_w / sum(WEIGHTS.values())
 
 
-def main(path):
+def main(path, as_json=False):
     pages = json.load(open(path, encoding="utf-8"))
     rows = []
     for p in pages:
         s, cov = score(p["signals"])
         rows.append((s, cov, p))
     rows.sort(key=lambda r: -r[0])
+    if as_json:
+        print(json.dumps([{"url": p["url"], "score": round(s, 1), "coverage": round(cov, 3), "signals": p["signals"]}
+                          for s, cov, p in rows], indent=2))
+        return
     print(f"\n  {'score':>5}  {'cover':>5}  page")
     for s, cov, p in rows:
         print(f"  {s:5.1f}  {cov:5.0%}  {p['url']}")
@@ -46,6 +50,7 @@ def main(path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    args = [a for a in sys.argv[1:] if a != "--json"]
+    if len(args) != 1:
         sys.exit(__doc__)
-    main(sys.argv[1])
+    main(args[0], as_json="--json" in sys.argv)

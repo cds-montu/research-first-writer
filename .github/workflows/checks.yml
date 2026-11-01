@@ -42,6 +42,13 @@ jobs:
             echo "check_article.py should block the weak draft"; exit 1
           fi
 
+      - name: Scaffold and JSON output work
+        run: |
+          d=$(mktemp -d)
+          python3 skills/research-first-writer/scripts/new_run.py smoke-test --dir "$d"
+          python3 skills/research-first-writer/scripts/check_article.py examples/how-to-get-cited-by-ai-search/article.md --json | python3 -c "import json,sys; json.load(sys.stdin)"
+          python3 skills/research-first-writer/scripts/score_pages.py examples/astro-vs-nextjs-for-a-blog/pages.json --json | python3 -c "import json,sys; json.load(sys.stdin)"
+
       - name: Page scorer runs on every example
         run: |
           for f in examples/*/pages.json; do python3 skills/research-first-writer/scripts/score_pages.py "$f" > /dev/null; done

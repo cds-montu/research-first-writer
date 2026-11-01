@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- `new_run.py`: scaffold a run folder from the templates
+- `--json` output for `check_article.py` and `score_pages.py`
+
 ## 0.1.0 (2026-11-01)
 
 First public release.

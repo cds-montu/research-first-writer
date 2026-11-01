@@ -18,7 +18,7 @@ Rules for examples:
 - **Report honestly.** If the judge fails it, keep the example: failures teach too.
 - Avoid YMYL topics (medical, financial, legal) unless you have the expertise and add an expert-review note.
 
-The easiest way is to let Claude Code do the run, then check it yourself:
+Start with `python3 skills/research-first-writer/scripts/new_run.py <slug> --dir examples` to create the folder with the templates filled in. The easiest way is to let Claude Code do the run, then check it yourself:
 
 ```bash
 claude --plugin-dir .

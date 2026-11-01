@@ -101,6 +101,7 @@ def main():
     ap.add_argument("article")
     ap.add_argument("--ledger", help="research brief with the facts ledger; defaults to 06-research-brief.md beside the article")
     ap.add_argument("--brief", help="the brief; defaults to 01-brief.md beside the article")
+    ap.add_argument("--json", action="store_true", help="print results as JSON instead of the report")
     args = ap.parse_args()
 
     meta, body = parse(args.article)
@@ -209,6 +210,16 @@ def main():
     long_paras = [p for p in paras if len(words(plain(p))) > 130]
     add("Style", "Paragraphs under 130 words", PASS if not long_paras else WARN, f"{len(long_paras)} long")
 
+    counts = {s: sum(1 for r in results if r[2] == s) for s in (PASS, WARN, BLOCK)}
+    if args.json:
+        import json
+        print(json.dumps({
+            "title": title, "words": n, "kind": kind, "keyword": kw,
+            "checks": [{"area": a_, "check": c, "severity": sv, "detail": d} for a_, c, sv, d in results],
+            "summary": {"pass": counts[PASS], "warn": counts[WARN], "block": counts[BLOCK], "needs_human": len(needs)},
+        }, indent=2, ensure_ascii=False))
+        return 1 if counts[BLOCK] else 0
+
     # Report
     print(f"\n  \033[1m{title}\033[0m")
     print(f"  {n} words · {len(h2s)} H2s · kind: {kind} · keyword: “{kw}”\n")
@@ -218,7 +229,6 @@ def main():
             print(f"  \033[2m{a}\033[0m")
             area = a
         print(f"    {ICON[sev]}  {check}" + (f"  \033[2m— {detail}\033[0m" if detail else ""))
-    counts = {s: sum(1 for r in results if r[2] == s) for s in (PASS, WARN, BLOCK)}
     print(f"\n  {counts[PASS]} passed · {counts[WARN]} warnings · {counts[BLOCK]} blocking")
     verdict = "Not ready: fix blocking checks first" if counts[BLOCK] else (
         "Not ready: items wait for a person" if needs else "Rules pass: send to the judge")
