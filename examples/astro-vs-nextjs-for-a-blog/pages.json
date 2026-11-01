@@ -1,0 +1,12 @@
+[
+  {"url": "dev.to/nayankyada/nextjs-vs-astro-for-content-sites-and-blogs-an-honest-comparison-4jp5",
+   "signals": {"serp_rank": 0.8, "serp_coverage": 1, "depth": 0.87, "engagement": null, "freshness": 1.0, "structure": 0.8, "eeat": 0.5, "media": 0.25, "ai_citation": null}},
+  {"url": "blog.logrocket.com/astro-vs-next-js-ssg-vs-react/",
+   "signals": {"serp_rank": 0.6, "serp_coverage": 1, "depth": 1.0, "engagement": null, "freshness": 0.75, "structure": 0.6, "eeat": 0.6, "media": 1.0, "ai_citation": null}},
+  {"url": "eastondev.com/blog/en/posts/dev/20251202-astro-vs-nextjs-comparison/",
+   "signals": {"serp_rank": 0.5, "serp_coverage": 1, "depth": 1.0, "engagement": null, "freshness": 0.75, "structure": 1.0, "eeat": 0.6, "media": 0.25, "ai_citation": null}},
+  {"url": "bejamas.com/stack/framework/astro-vs-next-js",
+   "signals": {"serp_rank": 0.2, "serp_coverage": 1, "depth": 0.47, "engagement": null, "freshness": null, "structure": 0.9, "eeat": 0.1, "media": 0.0, "ai_citation": null}},
+  {"url": "cloudcannon.com/blog/astro-vs-next-js/",
+   "signals": {"serp_rank": 0.0, "serp_coverage": 1, "depth": 1.0, "engagement": null, "freshness": 0.25, "structure": 0.6, "eeat": 0.6, "media": 0.25, "ai_citation": null}}
+]

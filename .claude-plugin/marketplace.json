@@ -1,0 +1,15 @@
+{
+  "name": "research-first-writer",
+  "description": "Research-first article writing for Google and AI answer engines (ChatGPT, Perplexity, AI Overviews).",
+  "owner": {
+    "name": "Jayanti Prajapati",
+    "url": "https://github.com/jayanti-prajapati"
+  },
+  "plugins": [
+    {
+      "name": "research-first-writer",
+      "source": "./",
+      "description": "Research-first article method for SEO and AI-search citations, with checks and worked examples."
+    }
+  ]
+}

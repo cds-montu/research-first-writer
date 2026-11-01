@@ -1,0 +1,47 @@
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate plugin manifests
+        run: |
+          python3 - <<'PY'
+          import json
+          for p in (".claude-plugin/plugin.json", ".claude-plugin/marketplace.json"):
+              d = json.load(open(p)); assert d.get("name"), p
+          import re
+          s = open("skills/research-first-writer/SKILL.md").read()
+          m = re.match(r"^---\nname: ([a-z0-9-]+)\ndescription: (.+?)\n---\n", s, re.S)
+          assert m, "SKILL.md front matter needs name and description"
+          assert len(m.group(2)) <= 1024, "description must be ≤ 1024 characters"
+          print("manifests and SKILL.md front matter OK")
+          PY
+
+      - name: Example articles pass the rule checks
+        run: |
+          for f in examples/*/article.md; do
+            echo "::group::$f"
+            python3 skills/research-first-writer/scripts/check_article.py "$f"
+            echo "::endgroup::"
+          done
+
+      - name: The weak draft is still caught
+        run: |
+          if python3 skills/research-first-writer/scripts/check_article.py examples/audit-a-weak-draft/draft.md; then
+            echo "check_article.py should block the weak draft"; exit 1
+          fi
+
+      - name: Page scorer runs on every example
+        run: |
+          for f in examples/*/pages.json; do python3 skills/research-first-writer/scripts/score_pages.py "$f" > /dev/null; done

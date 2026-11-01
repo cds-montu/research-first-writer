@@ -1,0 +1,12 @@
+# Changelog
+
+## 0.1.0 (2026-11-01)
+
+First public release.
+
+- The research-first article method as a portable skill (`skills/research-first-writer/`)
+- Claude Code plugin and marketplace manifests
+- `check_article.py`: rule-based draft checks, including number grounding against the facts ledger and blocking first-hand claims that have no notes behind them
+- `score_pages.py`: transparent page scores with signal coverage
+- Example runs: how-to blog, listicle, comparison, and a weak-draft audit
+- Screenshots generated from real runs, and a reproducible renderer

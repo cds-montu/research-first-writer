@@ -1,0 +1,8 @@
+[
+  {"url": "alternativeto.net/software/google-analytics",
+   "signals": {"serp_rank": 1.0, "serp_coverage": 1, "depth": 1.0, "engagement": 0.6, "freshness": 1.0, "structure": 0.6, "eeat": 0.25, "media": 1.0, "ai_citation": null}},
+  {"url": "zeabur.com/blogs/self-host-open-source-alternatives-to-google-analytics",
+   "signals": {"serp_rank": 0.9, "serp_coverage": 1, "depth": 0.67, "engagement": null, "freshness": 0.25, "structure": 0.6, "eeat": 0.5, "media": 1.0, "ai_citation": null}},
+  {"url": "selfhostyourself.com/alternative-to/google-analytics",
+   "signals": {"serp_rank": 0.4, "serp_coverage": 1, "depth": 1.0, "engagement": null, "freshness": null, "structure": 0.5, "eeat": 0.1, "media": 1.0, "ai_citation": null}}
+]
