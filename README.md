@@ -139,6 +139,10 @@ The most valuable contribution is **a new example run** on a keyword from your n
 
 If this saved you from publishing one more "in today's fast-paced world" article, **a ⭐ helps others find it.**
 
+## Maintainer
+
+Built and maintained by **Jay Prajapat** ([@jayanti-prajapati](https://github.com/jayanti-prajapati)), Ahmedabad, India. Questions and ideas: [open an issue](https://github.com/jayanti-prajapati/research-first-writer/issues) or start a [discussion](https://github.com/jayanti-prajapati/research-first-writer/discussions).
+
 ## License
 
 [MIT](LICENSE). Fork it, rebrand it, ship it inside your product.

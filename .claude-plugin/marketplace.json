@@ -2,7 +2,8 @@
   "name": "research-first-writer",
   "description": "Research-first article writing for Google and AI answer engines (ChatGPT, Perplexity, AI Overviews).",
   "owner": {
-    "name": "Jayanti Prajapati",
+    "name": "Jay Prajapat",
+    "email": "jayanti.prajapat@gmail.com",
     "url": "https://github.com/jayanti-prajapati"
   },
   "plugins": [

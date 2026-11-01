@@ -2,9 +2,21 @@
   "name": "research-first-writer",
   "version": "0.1.0",
   "description": "A research-first method for articles that beat what ranks in Google and get cited by AI answers: real SERP research, transparent page scores, a facts ledger, rule checks and a judge.",
-  "author": { "name": "Jayanti Prajapati", "url": "https://github.com/jayanti-prajapati" },
+  "author": {
+    "name": "Jay Prajapat",
+    "email": "jayanti.prajapat@gmail.com",
+    "url": "https://github.com/jayanti-prajapati"
+  },
   "homepage": "https://github.com/jayanti-prajapati/research-first-writer",
   "repository": "https://github.com/jayanti-prajapati/research-first-writer",
   "license": "MIT",
-  "keywords": ["seo", "geo", "aeo", "content", "writing", "ai-search", "skill"]
+  "keywords": [
+    "seo",
+    "geo",
+    "aeo",
+    "content",
+    "writing",
+    "ai-search",
+    "skill"
+  ]
 }
