@@ -133,6 +133,16 @@ python3 skills/research-first-writer/scripts/score_pages.py examples/how-to-get-
 
 See [ROADMAP.md](ROADMAP.md). Next up: a `/research-first-writer:write` command, Claude Code eval suites, an originality checker, and examples in more languages. Upvote or claim items in [Issues](https://github.com/jayanti-prajapati/research-first-writer/issues).
 
+## Forking this
+
+Fork it and make it yours: the method is brand-neutral on purpose.
+
+- **Keep your house rules out of `SKILL.md`.** Put brand voice, banned words, claims to avoid and brand facts in `skills/research-first-writer/references/house-style.md`, and add one line to `SKILL.md` telling the agent to read it at the brief step. Upstream changes then merge cleanly.
+- **Rename the plugin** in `.claude-plugin/plugin.json` and `marketplace.json` if you publish your own version, so installs don't clash.
+- **Tune the numbers in `references/checklists.md`** (length defaults, judge weights, pass marks) for your niche. The scripts read the same thresholds, so update both.
+- **Add your own runs under `examples/`.** CI checks them on every push.
+- Shipped something with it? Open a PR adding it to a "Built with research-first-writer" list.
+
 ## Contributing
 
 The most valuable contribution is **a new example run** on a keyword from your niche, with every step file included. Next come better checks and translations. See [CONTRIBUTING.md](CONTRIBUTING.md).
