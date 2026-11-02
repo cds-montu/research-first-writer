@@ -124,6 +124,11 @@ def norm_num(s):
 
 
 def main():
+    # Reports include Unicode article text and check labels. Keep output usable
+    # on Windows consoles whose legacy code page cannot encode those scripts.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("article")
     ap.add_argument("--ledger", help="research brief with the facts ledger; defaults to 06-research-brief.md beside the article")
