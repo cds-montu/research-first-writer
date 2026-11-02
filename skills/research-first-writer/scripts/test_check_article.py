@@ -1,8 +1,18 @@
 #!/usr/bin/env python3
 """Small regression tests for language-neutral article checks."""
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
 import unittest
 
 from check_article import non_latin_script, words
+
+
+ROOT = Path(__file__).resolve().parents[3]
+CHECKER = ROOT / "skills" / "research-first-writer" / "scripts" / "check_article.py"
 
 
 class UnicodeChecksTest(unittest.TestCase):
@@ -32,6 +42,40 @@ class UnicodeChecksTest(unittest.TestCase):
     def test_latin_and_non_latin_target_scripts_are_distinguished(self):
         self.assertFalse(non_latin_script("Wählen Sie una herramienta für kleine empresas"))
         self.assertTrue(non_latin_script("\u4e2d\u5c0f\u4f01\u696d\u5411\u3051\u306e\u30c4\u30fc\u30eb\u3092\u9078\u3073\u307e\u3059"))
+
+    def test_checker_runs_end_to_end_for_four_target_languages(self):
+        fixtures = {
+            "german": ("Werkzeug für kleine Unternehmen", "Kleine Teams profitieren von einer klaren Auswahl."),
+            "spanish": ("herramienta para pequeñas empresas", "Los equipos pequeños necesitan una elección clara."),
+            "hindi": ("छोटे व्यवसाय के लिए उपकरण", "छोटी टीमों के लिए स्पष्ट विकल्प उपयोगी हैं।"),
+            "japanese": ("中小企業向けのツール", "小さなチームには明確な選択肢が役立ちます。"),
+        }
+        with tempfile.TemporaryDirectory(dir=ROOT) as directory:
+            for slug, (keyword, sentence) in fixtures.items():
+                article = Path(directory) / f"{slug}.md"
+                article.write_text(
+                    "---\n"
+                    f"title: \"{keyword}\"\n"
+                    f"meta_title: \"{keyword}\"\n"
+                    f"meta_description: \"{sentence} {sentence} {sentence} {sentence}\"\n"
+                    f"slug: {slug}-article\n"
+                    f"keyword: {keyword}\n"
+                    "kind: blog\n"
+                    "target_words: 0\n"
+                    "---\n\n"
+                    f"## {keyword}\n\n{(sentence + ' ') * 30}\n",
+                    encoding="utf-8",
+                )
+                result = subprocess.run(
+                    [sys.executable, str(CHECKER), str(article), "--json"],
+                    cwd=ROOT,
+                    env={**os.environ, "PYTHONIOENCODING": "utf-8"},
+                    capture_output=True,
+                    check=False,
+                )
+                self.assertEqual(result.returncode, 0, f"{slug}: {result.stdout.decode('utf-8', errors='replace')} {result.stderr.decode('utf-8', errors='replace')}")
+                report = json.loads(result.stdout.decode("utf-8"))
+                self.assertEqual(report["summary"]["block"], 0, slug)
 
 
 if __name__ == "__main__":
