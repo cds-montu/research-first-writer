@@ -49,6 +49,11 @@ jobs:
           python3 skills/research-first-writer/scripts/check_article.py examples/how-to-get-cited-by-ai-search/article.md --json | python3 -c "import json,sys; json.load(sys.stdin)"
           python3 skills/research-first-writer/scripts/score_pages.py examples/astro-vs-nextjs-for-a-blog/pages.json --json | python3 -c "import json,sys; json.load(sys.stdin)"
 
+      - name: Audit command contract tests
+        run: python3 skills/research-first-writer/scripts/test_audit_command.py
+      - name: Write command contract tests
+        run: python3 skills/research-first-writer/scripts/test_write_command.py
+
       - name: Page scorer runs on every example
         run: |
           for f in examples/*/pages.json; do python3 skills/research-first-writer/scripts/score_pages.py "$f" > /dev/null; done

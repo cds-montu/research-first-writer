@@ -68,6 +68,15 @@ None of the three articles is marked "ready". Each leaves one honest `[[NEEDS_HU
 
 Then just ask: *"Write an article about X"*, *"Is this post good enough to publish?"* or *"Brief a writer on keyword Y"*. The skill triggers on its own.
 
+For an explicit, checkpointed run from a keyword, use:
+
+```text
+/research-first-writer:write best crm for small business
+/research-first-writer:write best crm for small business --kind listicle --market "United States, English (en-US)"
+```
+
+The command saves its run under `articles/<slug>/`, asks only for missing brief details, and pauses after discovery, baseline selection, and the outline for approval.
+
 ### Try it without installing
 
 ```bash
